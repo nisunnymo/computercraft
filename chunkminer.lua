@@ -254,9 +254,11 @@ end
 
 
 function forward()
-    item, inspect = turtle.inspect()
-    if (item and inspect["name"] == "minecraft:water") or (item and inspect["name"] == "minecraft:lava") then
-        turtle.place()
+    -- item, inspect = turtle.inspect()
+    itemup, inspectup = turtle.inspectUp()
+    if (itemup and inspectup["name"] == "minecraft:water") or (itemup and inspectup["name"] == "minecraft:lava") then
+        turtle.placeUp()
+        turtle.digUp()
     end
     fuel()
     export()
