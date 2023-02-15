@@ -30,7 +30,7 @@ function monitorWrite (monitor, orderTable, orderResourcesTable, builderResource
     mo.write("Name                ".. "Needed    ".. "Delivered")
     for k,v in ipairs(orderResourcesTable) do
         newline(mo)
-        mo.write("v["displayName"].. "    ".. v["needed"])
+        mo.write(v["displayName"].. "    ".. v["needed"])
     end
 end
 
