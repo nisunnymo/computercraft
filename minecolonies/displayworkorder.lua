@@ -27,7 +27,7 @@ function monitorWrite (monitor, orderTable, orderResourcesTable, builderResource
     end
 end
 
-mo, ci = init(monitorPeripheralSide="left", integratorPeripheralSide="right")
+mo, ci = init("left", "right")
 
 while true do
     monitorWrite(mo, getFirstOrder())
