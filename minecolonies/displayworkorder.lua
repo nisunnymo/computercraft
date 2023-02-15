@@ -11,7 +11,7 @@ function getFirstOrder (colonyIntegrator)
     if table.getn(workOrders) > 0 then
         orderTable = workOrders[1]
         orderResourcesTable = ci.getWorkOrderResources(orderTable["id"])
-        builderResources = ci.getBuilderResources(orderTable["builder"]["x"], orderTable["builder"]["y"], orderTable["builder"]["z"])
+        builderResources = ci.getBuilderResources(orderTable["builder"])
     end
     return orderTable, orderResourcesTable, builderResources
 end
