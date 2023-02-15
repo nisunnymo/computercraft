@@ -22,7 +22,7 @@ function monitorWrite (monitor, orderTable, orderResourcesTable, builderResource
     mo.setCursorPos(0, 0)
     mo.write("Type:", orderTable["workOrderType"], "Name:", orderTable["buildingName"], "Type:", orderTable["type"], "Level:", orderTable["targetLevel"])
     mo.write("Name                " + "Needed", "Delivered")
-    for k,v in ipairs(orderResourcesTable) do\
+    for k,v in ipairs(orderResourcesTable) do
         mo.write(orderResourcesTable["displayName"], orderResourcesTable["needed"])
     end
 end
