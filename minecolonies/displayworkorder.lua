@@ -17,13 +17,20 @@ function getFirstOrder (colonyIntegrator)
 end
 
 function monitorWrite (monitor, orderTable, orderResourcesTable, builderResources)
+    function newline (monitor)
+        mo = monitor
+        cx, cy = mo.getCursorPos()
+        mo.setCursorPos(1, cy + 1)
+    end
     mo = monitor
     mo.clear()
     mo.setCursorPos(1, 1)
-    mo.write("Type:", orderTable["workOrderType"], "Name:", orderTable["buildingName"], "Type:", orderTable["type"], "Level:", orderTable["targetLevel"], "\n")
-    mo.write("Name                ", "Needed", "Delivered")
+    mo.write("Type: ".. orderTable["workOrderType"].. " Name: ".. orderTable["buildingName"].. " Type: ".. orderTable["type"].. " Level: ".. orderTable["targetLevel"])
+    newline(mo)
+    mo.write("Name                ".. "Needed    ".. "Delivered")
     for k,v in ipairs(orderResourcesTable) do
-        mo.write("\n", orderResourcesTable["displayName"], orderResourcesTable["needed"])
+        newline(mo)
+        mo.write("v["displayName"].. "    ".. v["needed"])
     end
 end
 
