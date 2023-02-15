@@ -30,6 +30,6 @@ end
 mo, ci = init("left", "right")
 
 while true do
-    monitorWrite(mo, getFirstOrder())
+    monitorWrite(mo, getFirstOrder(ci))
     sleep(1)
 end
