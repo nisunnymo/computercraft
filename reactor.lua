@@ -35,7 +35,7 @@ while true do
     waste_sensor = failsafe_check(waste, "temperature")
     damage_sensor = failsafe_check(damage, "temperature")
 
-    if temp_sensor() or waste_sensor() or damage_sensor() then
+    if temp_sensor or waste_sensor or damage_sensor then
         disable_reactor()
     else
         enable_reactor()
