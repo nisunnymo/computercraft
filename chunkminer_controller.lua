@@ -14,7 +14,7 @@ local whoBlockedMe = 0
 
 while true do
     protocol = "enderturtle"
-    senderId, message = rednet.receive(receiveprotocol)
+    senderId, message = rednet.receive(protocol)
     print(message)
     if message == "isBlocked" then
         sleep(2)
