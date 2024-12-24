@@ -1,12 +1,16 @@
 -- set to 5 for bedrock level (5 + 63 for pre 1.18)
-y = 5
+
+y = 4
+CONTROLLER_ID = 10
+STORAGE_CHEST = "dimstorage:dimensional_chest"
+
 
 function block()
     receiveprotocol = "blocker"
     sendprotocol = "enderturtle"
 
     local function waitBlock()
-        rednet.send(16, "isBlocked", sendprotocol)
+        rednet.send(CONTROLLER_ID, "isBlocked", sendprotocol)
         senderId, message = rednet.receive(receiveprotocol, 20)
         print("blocked state: ", message)
         return message
@@ -14,7 +18,7 @@ function block()
 
     local function enableBlock()
         if not waitBlock() then
-            rednet.send(16, "block", sendprotocol)
+            rednet.send(CONTROLLER_ID, "block", sendprotocol)
         end
     end
 
@@ -31,7 +35,7 @@ function unblock()
     sendprotocol = "enderturtle"
 
     local function disableBlock()
-        rednet.send(16, "unblock", sendprotocol)
+        rednet.send(CONTROLLER_ID, "unblock", sendprotocol)
     end
     disableBlock()
 end
@@ -45,7 +49,7 @@ function fuel()
     print("trying to refuel")
     rednet.open("right")
     block()
-    rednet.send(16, "fuel", "enderturtle")
+    rednet.send(CONTROLLER_ID, "fuel", "enderturtle")
     local i = 1
     local chestPlaced = false
     for i = 1, 16, 1 do
@@ -53,7 +57,7 @@ function fuel()
             turtle.select(i)
             print("fuel debug 1", i)
             item = turtle.getItemDetail()
-            if (turtle.getItemCount(i) ~= 0) and (item["name"] == "enderstorage:ender_chest") then
+            if (turtle.getItemCount(i) ~= 0) and (item["name"] == STORAGE_CHEST) then
                 turtle.placeUp()
                 chestPlaced = true
             end
@@ -63,7 +67,7 @@ function fuel()
         end
     end
     item, inspect = turtle.inspectUp()
-    if (chestPlaced == true) and (inspect["name"] == "enderstorage:ender_chest") then
+    if (chestPlaced == true) and (inspect["name"] == STORAGE_CHEST) then
         while turtle.getFuelLevel() < 95000 do
             turtle.suckUp(64)
             turtle.refuel(64)
@@ -85,14 +89,14 @@ function export()
     print("trying to export")
     rednet.open("right")
     block()
-    rednet.send(16, "export", "enderturtle")
+    rednet.send(CONTROLLER_ID, "export", "enderturtle")
     local chestPlaced = false
     for i = 1, 16, 1 do
         if chestPlaced == false then
             turtle.select(i)
             print("export debug 1", i)
             item = turtle.getItemDetail()
-            if (turtle.getItemCount(i) ~= 0) and (item["name"] == "enderstorage:ender_chest") then
+            if (turtle.getItemCount(i) ~= 0) and (item["name"] == STORAGE_CHEST) then
                 turtle.placeUp()
                 chestPlaced = true
             end
@@ -102,7 +106,7 @@ function export()
         end
     end
     item, inspect = turtle.inspectUp()
-    if (chestPlaced == true) and (inspect["name"] == "enderstorage:ender_chest") then
+    if (chestPlaced == true) and (inspect["name"] == STORAGE_CHEST) then
         for i = 1, 16, 1 do
             print("exporting!", i)
             turtle.select(i)
