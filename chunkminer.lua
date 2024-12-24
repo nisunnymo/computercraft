@@ -193,14 +193,21 @@ function getHeading()
     local locnew = getLocation()
     turtle.back()
 
-    if locnew.z < loc.z then
+    if loc.z >= 0 and locnew.z < loc.z then
         heading = "N"
-    elseif locnew.z > loc.z then
+    elseif loc.z < 0 and locnew.z < loc.z then
         heading = "S"
-    elseif locnew.x < loc.x then
+    elseif locnew.z >= 0 and locnew.z > loc.z then
+        heading = "S"
+    elseif locnew.z < 0 and locnew.z > loc.z then
+        heading = "N"
+    elseif locnew.x >= 0 and locnew.x < loc.x then
         heading = "W"
-    elseif locnew.x > loc.x then
+    elseif locnew.x < 0 and locnew.x < loc.x then
         heading = "E"
+    elseif locnew.x >= 0 and locnew.x > loc.x then
+        heading = "E"
+    elseif locnew.x < 0 and locnew.x > loc.x then
     end
 
     print("heading:", heading)
