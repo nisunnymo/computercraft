@@ -156,17 +156,14 @@ function getChunkAlignment(x,z)
     if position_difference.x < 0 then
         position_difference.x = position_difference.x * -1
     end
-    if diffpos.z<0 then
-        diffpos.z=diffpos.z*-1
-    end 
-    
-    print("differences, x:",diffpos.x,"z:",diffpos.z)
-    print("moving turtle to location 0")
-    
-    --returns difference as a number
-    return diffpos
-end
 
+    if position_difference.z < 0 then
+        position_difference.z = position_difference.z * -1
+    end
+
+    print("to align: x: ", position_difference.x, " z: ", position_difference.z)
+    return position_difference
+end
 
 
 function getHeading()
