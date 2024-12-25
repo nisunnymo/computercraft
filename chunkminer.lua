@@ -1,6 +1,6 @@
 -- set to 5 for bedrock level (5 + 63 for pre 1.18)
 
-y = 4
+MINIMUM_Y = 4
 CONTROLLER_ID = 10
 STORAGE_CHEST = "dimstorage:dimensional_chest"
 
