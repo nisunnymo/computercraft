@@ -187,6 +187,7 @@ function getHeading()
 end
 
 function setHeading(currentheading, desiredheading)
+    -- these are checks if heading inputs are valid
     if currentheading ~= "N" and currentheading ~= "S" and currentheading ~= "W" and currentheading ~= "E" then
         return false
     elseif desiredheading ~= "N" and desiredheading ~= "S" and desiredheading ~= "W" and desiredheading ~= "E" then
