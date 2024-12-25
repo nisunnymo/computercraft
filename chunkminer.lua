@@ -268,51 +268,72 @@ function down(amount)
 end
 -- bedrock up to Y=5 so always substract 5 to get absolute zero at above bedrock level
 
-goCorner()
-local loc = getLocation()
-
-remainingy = (loc.y + 63 - y) 
-
-excavatedy = 0
-while remainingy>0 do
-    print("Y left to excavate: ", remainingy)
-    if excavatedy>0 then
-        down()
-    end
+function excavate()
     if (getChunkAlignment().x == 0 and getChunkAlignment().z == 0) then
-        setHeading(getHeading(), "N")
-        for outer=1,3 do
-            for i=1,15 do 
-                forward()
-            end
+        setHeading(getHeading(), "S")
+        for doublerows = 8, 1, -1 do
+            forward(16)
+            turtle.turnLeft()
+            forward()
+            turtle.turnLeft()
+            forward(16)
+            turtle.turnRight()
+            forward()
             turtle.turnRight()
         end
-        for inner=14,1,-1 do
-            for i=1,2 do
-                for j=inner,1,-1 do
-                    forward()
-                end
-                turtle.turnRight()
-            end
-        end
-    else
-        setHeading(getHeading(), "N")
-        for inner=1,14,1 do
-            for i=1,2 do
-                for j=inner,1,-1 do
-                    forward()
-                end
-                turtle.turnLeft()
-            end
-        end
-        for outer=1,3 do
-            for i=1,15 do 
-                forward()
-            end
+        down()
+        return true
+    elseif (getChunkAlignment().x == 16 and getChunkAlignment().z == 0) then
+        setHeading(getHeading(), "S")
+        for doublerows = 8, 1, -1 do
+            forward(16)
+            turtle.turnRight()
+            forward()
+            turtle.turnRight()
+            forward(16)
+            turtle.turnLeft()
+            forward()
             turtle.turnLeft()
         end
+        down()
+        return true
+    else
+        print("Chunk alignment not correct")
+        return false
     end
-    excavatedy = excavatedy + 1
-    remainingy = remainingy - 1
 end
-print("excavating finished")-- bedrock up to Y=5 so always substract 5 to get absolute zero at above bedrock level
+
+function main()
+
+    goCorner()
+    local current_location = getLocation()
+
+    local remaining_y = (current_location.y + 63 - MINIMUM_Y) 
+
+    local excavated_y = 0
+    while remaining_y>0 do
+        print("Y left to excavate: ", remaining_y)
+        -- start excavating
+        local excavate_status = excavate()
+
+        if excavate_status == false then
+            print("excavation failed, going to corner")
+            goCorner()
+        end
+        
+        local new_location = getLocation()
+
+        -- check if Y changed, if not loop continue without decrementing remaining_y
+        if new_location.y == current_location.y then
+            print("Y did not change, excavation failed")
+        else
+            excavated_y = excavated_y + (current_location.y - new_location.y)
+            remaining_y = remaining_y - (current_location.y - new_location.y)
+            current_location = new_location
+        end
+    end
+
+    print("excavating finished")
+end
+
+main()
