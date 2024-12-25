@@ -73,6 +73,7 @@ function fuel()
             turtle.refuel(64)
         end
     end
+
     if chestPlaced == true then
         turtle.drop(64)
         turtle.digUp()
@@ -106,6 +107,7 @@ function export()
         end
     end
     item, inspect = turtle.inspectUp()
+
     if (chestPlaced == true) and (inspect["name"] == STORAGE_CHEST) then
         for i = 1, 16, 1 do
             print("exporting!", i)
