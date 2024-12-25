@@ -201,35 +201,28 @@ function setHeading(currentheading, desiredheading)
 end
 
 function goCorner()
-    local heading = getHeading()
-    local toalign = getChunkAlignment()
-    local loc = getLocation()
+    local current_heading = getHeading()
+    local position_difference = getChunkAlignment()
+    local current_location = getLocation()
 
-    local isznegative = isNegative(loc.z)
-    local isxnegative = isNegative(loc.x)
-
-    -- first go SOUTH
-
-    if toalign.z > 0 then
-        setHeading(heading, "S")
-        print("moving", toalign.z, "blocks", getHeading())
-        for i = 1, toalign.z, 1 do
+    -- first go NORTH
+    if position_difference.z > 0 then
+        setHeading(current_heading, "N")
+        for i = 1, position_difference.z, 1 do
             forward()
         end
     end
 
     -- now go WEST
-    
-    if toalign.x > 0 then
-        setHeading(getHeading(), "W")
-        print("moving", toalign.x, "blocks", getHeading())
-        for i = 1, toalign.x, 1 do
+    if position_difference.x > 0 then
+        setHeading(current_heading, "W")
+        for i = 1, position_difference.x, 1 do
             forward()
         end
     end
-    setHeading(getHeading(), "N")
+
     local checkalign = getChunkAlignment()
-    if toalign.z == 0 and toalign.x == 0 then
+    if position_difference.z == 0 and position_difference.x == 0 then
         return true
     else
         return false
