@@ -271,7 +271,8 @@ end
 function excavate()
     if (getChunkAlignment().x == 0 and getChunkAlignment().z == 0) then
         setHeading(getHeading(), "S")
-        for doublerows = 8, 1, -1 do
+        -- do 14 rows in doublerows loop, then finalize without entering another row
+        for doublerows = 7, 1, -1 do
             forward(15)
             turtle.turnLeft()
             forward()
@@ -281,11 +282,19 @@ function excavate()
             forward()
             turtle.turnRight()
         end
+        forward(15)
+        turtle.turnLeft()
+        forward()
+        turtle.turnLeft()
+        forward(15)
+        turtle.turnRight()
+        turtle.turnRight()
         down()
         return true
     elseif (getChunkAlignment().x == 15 and getChunkAlignment().z == 0) then
         setHeading(getHeading(), "S")
-        for doublerows = 8, 1, -1 do
+        -- do 14 rows in doublerows loop, then finalize without entering another row
+        for doublerows = 7, 1, -1 do
             forward(15)
             turtle.turnRight()
             forward()
@@ -295,6 +304,13 @@ function excavate()
             forward()
             turtle.turnLeft()
         end
+        forward(15)
+        turtle.turnRight()
+        forward()
+        turtle.turnRight()
+        forward(15)
+        turtle.turnLeft()
+        turtle.turnLeft()
         down()
         return true
     else
