@@ -49,6 +49,8 @@ function fuel()
     print("trying to refuel")
     rednet.open("right")
     block()
+    -- sleep a few seconds to allow controller to empty chest
+    sleep(5)
     rednet.send(CONTROLLER_ID, "fuel", "enderturtle")
     local i = 1
     local chestPlaced = false
