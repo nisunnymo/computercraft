@@ -137,42 +137,24 @@ function isNegative(value)
 end
 
 function getChunkAlignment(x,z)
-    local currentpos = getLocation()
-    local alignpos = vector.new(0,0,0)
-    --using correct equasion for positive/negative x,z position
-    if currentpos.x>0 then
-        while currentpos.x/16>=alignpos.x/16 do
-            alignpos.x = alignpos.x+16
-        end
-        alignpos.x = alignpos.x - 16
-    else
-        while currentpos.x/16<=alignpos.x/16 do
-            alignpos.x = alignpos.x-16
-        end
-        alignpos.x = alignpos.x + 15
-    end
-    
-    if currentpos.z>0 then
-        while currentpos.z/16>=alignpos.z/16 do
-            alignpos.z = alignpos.z+16
-        end
-        alignpos.z = alignpos.z - 16
-    else
-        while currentpos.z/16<=alignpos.z/16 do
-            alignpos.z = alignpos.z-16
-        end
-        alignpos.z = alignpos.z + 15
-    end
-    
-    --math for chunk location difference for x,z axis2
-    print("chunk location:",alignpos.x,alignpos.y,alignpos.z)
-    diffpos = vector.new(0, 0, 0)
-    diffpos.x = currentpos.x - alignpos.x
-    diffpos.z = currentpos.z - alignpos.z
-    
-    --converting negative amount
-    if diffpos.x<0 then
-        diffpos.x=diffpos.x*-1
+    local current_position = getLocation()
+    local target_position = vector.new(0,0,0)
+
+    -- get chunk lowest value by using math.floor function
+    -- from minecraft perspective, this is always the most north west corner of the chunk
+    target_position.x = math.floor(current_position.x/16)*16
+    target_position.z = math.floor(current_position.z/16)*16
+
+    local position_difference = vector.new(0, 0, 0)
+
+    -- calculate the difference between the current position and the target position
+    -- these will always be zero or negative
+    position_difference.x = current_position.x - target_position.x
+    position_difference.z = current_position.z - target_position.z
+
+    -- convert negative values to positive
+    if position_difference.x < 0 then
+        position_difference.x = position_difference.x * -1
     end
     if diffpos.z<0 then
         diffpos.z=diffpos.z*-1
