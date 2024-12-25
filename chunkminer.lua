@@ -173,29 +173,13 @@ function getHeading()
     turtle.back()
 
     if locnew.z < loc.z then
-        if loc.z >= 0 then
-            heading = "N"
-        else
-            heading = "S"
-        end
+        heading = "N"
     elseif locnew.z > loc.z then
-        if loc.z >= 0 then
-            heading = "S"
-        else
-            heading = "N"
-        end
+        heading = "S"
     elseif locnew.x < loc.x then
-        if loc.x >= 0 then
-            heading = "W"
-        else
-            heading = "E"
-        end
+        heading = "W"
     elseif locnew.x > loc.x then
-        if loc.x >= 0 then
-            heading = "E"
-        else
-            heading = "W"
-        end
+        heading = "E"
     end
 
     print("heading:", heading)
