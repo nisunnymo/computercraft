@@ -230,26 +230,40 @@ function goCorner()
 end
 
 
-function forward()
-    -- item, inspect = turtle.inspect()
-    itemup, inspectup = turtle.inspectUp()
-    if (itemup and inspectup["name"] == "minecraft:water") or (itemup and inspectup["name"] == "minecraft:lava") then
-        turtle.placeUp()
-        turtle.digUp()
+function forward(amount)
+    -- if no amount is given, move 1 block
+    if amount == nil then
+        amount = 1
     end
-    fuel()
-    export()
-    while not turtle.forward() and turtle.getFuelLevel()>0 do
-        turtle.dig()
+
+    for i = 1, amount, 1 do
+        itemup, inspectup = turtle.inspectUp()
+        if (itemup and inspectup["name"] == "minecraft:water") or (itemup and inspectup["name"] == "minecraft:lava") then
+            turtle.placeUp()
+            turtle.digUp()
+        end
+        fuel()
+        export()
+        while not turtle.forward() and turtle.getFuelLevel()>0 do
+            turtle.dig()
+        end
     end
 end
-function down()
-    item, inspect = turtle.inspectDown()
-        if (item and inspect["name"] == "minecraft:water") or (item and inspect["name"] == "minecraft:lava") then
-            turtle.placeDown()
+
+function down(amount)
+    -- if no amount is given, move 1 block
+    if amount == nil then
+        amount = 1
+    end
+
+    for i = 1, amount, 1 do
+        item, inspect = turtle.inspectDown()
+            if (item and inspect["name"] == "minecraft:water") or (item and inspect["name"] == "minecraft:lava") then
+                turtle.placeDown()
+            end
+        while not turtle.down() and turtle.getFuelLevel()>0 do
+            turtle.digDown()
         end
-    while not turtle.down() and turtle.getFuelLevel()>0 do
-        turtle.digDown()
     end
 end
 -- bedrock up to Y=5 so always substract 5 to get absolute zero at above bedrock level
