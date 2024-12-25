@@ -66,6 +66,8 @@ function fuel()
             end
         end
     end
+    -- sleep few seconds to allow controller to place fuel
+    sleep(5)
     item, inspect = turtle.inspectUp()
     if (chestPlaced == true) and (inspect["name"] == STORAGE_CHEST) then
         while turtle.getFuelLevel() < 95000 do
