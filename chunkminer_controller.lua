@@ -17,7 +17,6 @@ while true do
     senderId, message = rednet.receive(protocol)
     print(message)
     if message == "isBlocked" then
-        sleep(2)
         rednet.send(senderId, blocked, "blocker")
     end
 
