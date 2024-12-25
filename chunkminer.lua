@@ -272,25 +272,25 @@ function excavate()
     if (getChunkAlignment().x == 0 and getChunkAlignment().z == 0) then
         setHeading(getHeading(), "S")
         for doublerows = 8, 1, -1 do
-            forward(16)
+            forward(15)
             turtle.turnLeft()
             forward()
             turtle.turnLeft()
-            forward(16)
+            forward(15)
             turtle.turnRight()
             forward()
             turtle.turnRight()
         end
         down()
         return true
-    elseif (getChunkAlignment().x == 16 and getChunkAlignment().z == 0) then
+    elseif (getChunkAlignment().x == 15 and getChunkAlignment().z == 0) then
         setHeading(getHeading(), "S")
         for doublerows = 8, 1, -1 do
-            forward(16)
+            forward(15)
             turtle.turnRight()
             forward()
             turtle.turnRight()
-            forward(16)
+            forward(15)
             turtle.turnLeft()
             forward()
             turtle.turnLeft()
