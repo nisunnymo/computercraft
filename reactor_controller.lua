@@ -34,4 +34,5 @@ while true do
     if temp_sensor or waste_sensor or damage_sensor then
         disable_reactor()
     end
+    sleep(0) --we need to make sure we yield some time
 end
