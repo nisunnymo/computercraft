@@ -71,8 +71,6 @@ function failsafe_checks(reactor)
     end
 end
 
-
-
 function check_enable_switch()
     if redstone.getAnalogInput("front") > 0 then
         return true
@@ -81,14 +79,28 @@ function check_enable_switch()
     end
 end
 
+function activate_reactor(reactor)
+    if not reactor.getStatus() then
+        print("Enabling reactor!")
+        reactor.activate()
+    end
+end
+
+function deactivate_reactor(reactor)
+    if reactor.getStatus() then
+        print("Disabling reactor!")
+        reactor.scram()
+    end
+end
+
 function main(reactor)
     if not check_enable_switch() then
-        reactor.scram()
+        deactivate_reactor(reactor)
     else
         if failsafe_checks(reactor) then
-            reactor.activate()
+            activate_reactor(reactor)
         else
-            reactor.scram()
+            deactivate_reactor(reactor)
         end
     end
 end
