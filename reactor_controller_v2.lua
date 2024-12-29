@@ -90,6 +90,7 @@ function main(reactor)
         else
             reactor.scram()
         end
+    end
 end
 
 local reactor = peripheral.wrap("back")
