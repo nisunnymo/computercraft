@@ -20,7 +20,7 @@ end
 function waste_level_failsafe_check(reactor)
     local waste_percentage = reactor.getWasteFilledPercentage()
     if waste_percentage > WASTE_FILLED_PERCENTAGE_THRESHOLD then
-        print("Waste level is over ", WASTE_FILLED_PERCENTAGE_THRESHOLD, "%!")
+        print("Waste level is over ", WASTE_FILLED_PERCENTAGE_THRESHOLD, "%! (", waste_percentage, "%)")
         return false
     else
         return true
@@ -30,7 +30,7 @@ end
 function damage_failsafe_check(reactor)
     local damage_percentage = reactor.getDamagePercent()
     if damage_percentage > DAMAGE_PERCENTAGE_THRESHOLD then
-        print("Damage is over ", DAMAGE_PERCENTAGE_THRESHOLD, "%!")
+        print("Damage is over ", DAMAGE_PERCENTAGE_THRESHOLD, "%! (", damage_percentage, "%)")
         return false
     else
         return true
@@ -40,7 +40,7 @@ end
 function coolant_level_failsafe_check(reactor)
     local coolant_percentage = reactor.getCoolantFilledPercentage()
     if coolant_percentage < COOLANT_FILLED_PERCENTAGE_THRESHOLD then
-        print("Coolant fill level is below ", COOLANT_FILLED_PERCENTAGE_THRESHOLD, "%!")
+        print("Coolant fill level is below ", COOLANT_FILLED_PERCENTAGE_THRESHOLD, "%! (", coolant_percentage, "%)")
         return false
     else
         return true
@@ -50,7 +50,7 @@ end
 function heated_coolant_level_failsafe_check(reactor)
     local heated_coolant_percentage = reactor.getHeatedCoolantFilledPercentage()
     if heated_coolant_percentage > HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD then
-        print("Heated coolant level is over ", HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD, "%!")
+        print("Heated coolant level is over ", HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD, "%! (", heated_coolant_percentage, "%)")
         return false
     else
         return true
