@@ -1,7 +1,7 @@
 function failsafe_check(side, name)
     -- sensor = peripheral.wrap(side)
     if redstone.getAnalogInput(side) > 0 then
-        print(name + " failsafe triggered!")
+        print(name, " failsafe triggered!")
         return true
     end
 end
