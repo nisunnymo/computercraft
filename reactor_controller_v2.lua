@@ -1,10 +1,10 @@
 local pretty = require("cc.pretty")
 
 local TEMPERATURE_THRESHOLD = 800 --kelvin 
-local WASTE_FILLED_PERCENTAGE_THRESHOLD = 90 --percentage
-local DAMAGE_PERCENTAGE_THRESHOLD = 50 --percentage
-local COOLANT_FILLED_PERCENTAGE_THRESHOLD = 10 --percentage
-local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 90 --percentage
+local WASTE_FILLED_PERCENTAGE_THRESHOLD = 0.9 --percentage
+local DAMAGE_PERCENTAGE_THRESHOLD = 0.8 --percentage
+local COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.1 --percentage
+local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.9 --percentage
 
 
 function temperature_failsafe_check(reactor)
