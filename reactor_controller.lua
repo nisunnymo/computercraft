@@ -31,7 +31,9 @@ while true do
     waste_sensor = failsafe_check("top", "waste")
     damage_sensor = failsafe_check("right", "damage")
 
-    if temp_sensor or waste_sensor or damage_sensor then
+    if redstone.getAnalogInput("front") > 0 and not (temp_sensor or waste_sensor or damage_sensor) then
+        enable_reactor()
+    else
         disable_reactor()
     end
     sleep(0) --we need to make sure we yield some time
