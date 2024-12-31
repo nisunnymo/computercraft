@@ -6,6 +6,15 @@ local DAMAGE_PERCENTAGE_THRESHOLD = 0.8 --percentage
 local COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.1 --percentage
 local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.9 --percentage
 
+function check_reactor_availability(reactor)
+    -- reactor peripheral functions will not return any value if it isn't
+
+    if reactor.getTemperature() ~= nil then
+        return false
+    else
+        return true
+    end
+end
 
 function temperature_failsafe_check(reactor)
     local temperature = reactor.getTemperature()
@@ -106,6 +115,12 @@ function main(reactor)
 end
 
 local reactor = peripheral.wrap("back")
+
+while not reactor do
+    print("Reactor not found! Retrying...")
+    sleep(1)
+    reactor = peripheral.wrap("back")
+end
 
 while true do
     main(reactor)
