@@ -25,7 +25,7 @@ end
 function temperature_failsafe_check(reactor)
     local temperature = reactor.getTemperature()
     if temperature > TEMPERATURE_THRESHOLD then
-        print(string.format("Temperature is over %.0f", TEMPERATURE_THRESHOLD), "K!")
+        print(string.format("Temperature is %.0fK! (threshold: %.0fK)", temperature, TEMPERATURE_THRESHOLD))
         return false
     else
         return true
@@ -35,7 +35,7 @@ end
 function waste_level_failsafe_check(reactor)
     local waste_percentage = reactor.getWasteFilledPercentage() * 100
     if waste_percentage > WASTE_FILLED_PERCENTAGE_THRESHOLD then
-        print(string.format("Waste level is over %.0f", WASTE_FILLED_PERCENTAGE_THRESHOLD), "%! (", waste_percentage, "%)")
+        print(string.format("Waste level is %.0f%%! (threshold: %.0f%%)", waste_percentage, WASTE_FILLED_PERCENTAGE_THRESHOLD))
         return false
     else
         return true
@@ -45,7 +45,7 @@ end
 function damage_failsafe_check(reactor)
     local damage_percentage = reactor.getDamagePercent() * 100
     if damage_percentage > DAMAGE_PERCENTAGE_THRESHOLD then
-        print(string.format("Damage is over %.0f", DAMAGE_PERCENTAGE_THRESHOLD), "%! (", damage_percentage, "%)")
+        print(string.format("Damage is %.0f%%! (threshold: %.0f%%)", damage_percentage, DAMAGE_PERCENTAGE_THRESHOLD))
         return false
     else
         return true
@@ -55,7 +55,7 @@ end
 function coolant_level_failsafe_check(reactor)
     local coolant_percentage = reactor.getCoolantFilledPercentage() * 100
     if coolant_percentage < COOLANT_FILLED_PERCENTAGE_THRESHOLD then
-        print(string.format("Coolant fill level is below %.0f", COOLANT_FILLED_PERCENTAGE_THRESHOLD), "%! (", coolant_percentage, "%)")
+        print(string.format("Coolant fill level is %.0f%%! (threshold: %.0f%%)", coolant_percentage, COOLANT_FILLED_PERCENTAGE_THRESHOLD))
         return false
     else
         return true
@@ -65,7 +65,7 @@ end
 function heated_coolant_level_failsafe_check(reactor)
     local heated_coolant_percentage = reactor.getHeatedCoolantFilledPercentage() * 100
     if heated_coolant_percentage > HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD then
-        print(string.format("Heated coolant level is over %.0f", HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD), "%! (", heated_coolant_percentage, "%)")
+        print(string.format("Heated coolant level is %.0f%%! (threshold: %.0f%%)", heated_coolant_percentage, HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD))
         return false
     else
         return true
