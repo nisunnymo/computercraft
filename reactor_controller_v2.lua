@@ -6,9 +6,20 @@ local DAMAGE_PERCENTAGE_THRESHOLD = 0.8 --percentage
 local COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.1 --percentage
 local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.9 --percentage
 
+function reactor_peripheral_wrapper()
+    local reactor = peripheral.wrap("back")
+    while not reactor.isFormed() do
+        sleep(0.2)
+        reactor = peripheral.wrap("back")
+    end
+    return reactor
+end
+
 function check_reactor_availability(reactor)
     -- most reactor peripheral functions will error if the reactor is not available
-    if reactor.isFormed() then return true else return false end
+    if reactor.isFormed() then 
+        
+        return true else return false end
 end
 
 function temperature_failsafe_check(reactor)
@@ -63,9 +74,6 @@ end
 
 -- failsafe checks, passed if TRUE, failed if FALSE
 function failsafe_checks(reactor)
-    if not check_reactor_availability(reactor) then
-        return false
-    end
     local temperature_failsafe_passed = temperature_failsafe_check(reactor)
     local waste_failsafe_passed = waste_level_failsafe_check(reactor)
     local damage_failsafe_passed = damage_failsafe_check(reactor)
@@ -100,7 +108,8 @@ function deactivate_reactor(reactor)
     end
 end
 
-function main(reactor)
+function run_reactor()
+    local reactor = reactor_peripheral_wrapper()
     if not check_enable_switch() then
         deactivate_reactor(reactor)
     else
@@ -112,14 +121,11 @@ function main(reactor)
     end
 end
 
-local reactor = peripheral.wrap("back")
+function main()
+    while true do
+        run_reactor()
+        sleep(0) --we need to make sure we yield some time
+    end
+end
 
-while not check_reactor_availability(reactor) do
-    print("Reactor not found! Waiting for reactor to be available...")
-    sleep(0.5)
-end
-sleep(1) -- for some reason reactor still not available immediately after being formed
-while true do
-    main(reactor)
-    sleep(0) --we need to make sure we yield some time
-end
+main()
