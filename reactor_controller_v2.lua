@@ -116,9 +116,9 @@ local reactor = peripheral.wrap("back")
 
 while not check_reactor_availability(reactor) do
     print("Reactor not found! Waiting for reactor to be available...")
-    sleep(0.2)
+    sleep(0.5)
 end
-
+sleep(0.5) -- for some reason reactor still not available immediately after being formed
 while true do
     main(reactor)
     sleep(0) --we need to make sure we yield some time
