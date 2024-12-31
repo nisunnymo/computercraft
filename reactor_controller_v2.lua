@@ -68,6 +68,9 @@ end
 
 -- failsafe checks, passed if TRUE, failed if FALSE
 function failsafe_checks(reactor)
+    if not check_reactor_availability(reactor) then
+        return false
+    end
     local temperature_failsafe_passed = temperature_failsafe_check(reactor)
     local waste_failsafe_passed = waste_level_failsafe_check(reactor)
     local damage_failsafe_passed = damage_failsafe_check(reactor)
@@ -116,10 +119,9 @@ end
 
 local reactor = peripheral.wrap("back")
 
-while not reactor do
-    print("Reactor not found! Retrying...")
-    sleep(1)
-    reactor = peripheral.wrap("back")
+while not check_reactor_availability(reactor) do
+    print("Reactor not found! Waiting for reactor to be available...")
+    sleep(0.2)
 end
 
 while true do
