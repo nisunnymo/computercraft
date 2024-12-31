@@ -9,10 +9,10 @@ local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.9 --percentage
 function check_reactor_availability(reactor)
     -- reactor peripheral functions will not return any value if it isn't
 
-    if reactor.getTemperature() ~= nil then
-        return false
-    else
+    if type(reactor.getTemperature()) == "number" then
         return true
+    else
+        return false
     end
 end
 
