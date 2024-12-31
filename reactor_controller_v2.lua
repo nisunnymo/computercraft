@@ -7,13 +7,8 @@ local COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.1 --percentage
 local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.9 --percentage
 
 function check_reactor_availability(reactor)
-    -- reactor peripheral functions will not return any value if it isn't
-
-    if type(reactor.getTemperature()) == "number" then
-        return true
-    else
-        return false
-    end
+    -- most reactor peripheral functions will error if the reactor is not available
+    if reactor.isFormed() then return true else return false end
 end
 
 function temperature_failsafe_check(reactor)
