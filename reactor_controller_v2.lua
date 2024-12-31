@@ -1,10 +1,10 @@
 local pretty = require("cc.pretty")
 
 local TEMPERATURE_THRESHOLD = 800 --kelvin 
-local WASTE_FILLED_PERCENTAGE_THRESHOLD = 0.9 --percentage
+local WASTE_FILLED_PERCENTAGE_THRESHOLD = 0.5 --percentage
 local DAMAGE_PERCENTAGE_THRESHOLD = 0.8 --percentage
-local COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.1 --percentage
-local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.9 --percentage
+local COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.5 --percentage
+local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.5 --percentage
 
 function reactor_peripheral_wrapper()
     local reactor = peripheral.wrap("back")
