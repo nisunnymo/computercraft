@@ -1,10 +1,10 @@
 local pretty = require("cc.pretty")
 
 local TEMPERATURE_THRESHOLD = 800 --kelvin 
-local WASTE_FILLED_PERCENTAGE_THRESHOLD = 0.5 --percentage
-local DAMAGE_PERCENTAGE_THRESHOLD = 0.8 --percentage
-local COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.5 --percentage
-local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 0.5 --percentage
+local WASTE_FILLED_PERCENTAGE_THRESHOLD = 50 --percentage
+local DAMAGE_PERCENTAGE_THRESHOLD = 80 --percentage
+local COOLANT_FILLED_PERCENTAGE_THRESHOLD = 50 --percentage
+local HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD = 50 --percentage
 
 function reactor_peripheral_wrapper()
     local reactor = peripheral.wrap("back")
@@ -25,7 +25,7 @@ end
 function temperature_failsafe_check(reactor)
     local temperature = reactor.getTemperature()
     if temperature > TEMPERATURE_THRESHOLD then
-        print("Temperature is over ", TEMPERATURE_THRESHOLD, "K!")
+        print("Temperature is over %.0f", TEMPERATURE_THRESHOLD, "K!")
         return false
     else
         return true
@@ -33,9 +33,9 @@ function temperature_failsafe_check(reactor)
 end
 
 function waste_level_failsafe_check(reactor)
-    local waste_percentage = reactor.getWasteFilledPercentage()
+    local waste_percentage = reactor.getWasteFilledPercentage() * 100
     if waste_percentage > WASTE_FILLED_PERCENTAGE_THRESHOLD then
-        print("Waste level is over ", WASTE_FILLED_PERCENTAGE_THRESHOLD, "%! (", waste_percentage, "%)")
+        print("Waste level is over %.0f", WASTE_FILLED_PERCENTAGE_THRESHOLD, "%! (", waste_percentage, "%)")
         return false
     else
         return true
@@ -43,9 +43,9 @@ function waste_level_failsafe_check(reactor)
 end
 
 function damage_failsafe_check(reactor)
-    local damage_percentage = reactor.getDamagePercent()
+    local damage_percentage = reactor.getDamagePercent() * 100
     if damage_percentage > DAMAGE_PERCENTAGE_THRESHOLD then
-        print("Damage is over ", DAMAGE_PERCENTAGE_THRESHOLD, "%! (", damage_percentage, "%)")
+        print("Damage is over %.0f", DAMAGE_PERCENTAGE_THRESHOLD, "%! (", damage_percentage, "%)")
         return false
     else
         return true
@@ -53,9 +53,9 @@ function damage_failsafe_check(reactor)
 end
 
 function coolant_level_failsafe_check(reactor)
-    local coolant_percentage = reactor.getCoolantFilledPercentage()
+    local coolant_percentage = reactor.getCoolantFilledPercentage() * 100
     if coolant_percentage < COOLANT_FILLED_PERCENTAGE_THRESHOLD then
-        print("Coolant fill level is below ", COOLANT_FILLED_PERCENTAGE_THRESHOLD, "%! (", coolant_percentage, "%)")
+        print("Coolant fill level is below %.0f", COOLANT_FILLED_PERCENTAGE_THRESHOLD, "%! (", coolant_percentage, "%)")
         return false
     else
         return true
@@ -63,9 +63,9 @@ function coolant_level_failsafe_check(reactor)
 end
 
 function heated_coolant_level_failsafe_check(reactor)
-    local heated_coolant_percentage = reactor.getHeatedCoolantFilledPercentage()
+    local heated_coolant_percentage = reactor.getHeatedCoolantFilledPercentage() * 100
     if heated_coolant_percentage > HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD then
-        print("Heated coolant level is over ", HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD, "%! (", heated_coolant_percentage, "%)")
+        print("Heated coolant level is over %.0f", HEATED_COOLANT_FILLED_PERCENTAGE_THRESHOLD, "%! (", heated_coolant_percentage, "%)")
         return false
     else
         return true
