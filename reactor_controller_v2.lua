@@ -43,7 +43,7 @@ function waste_level_failsafe_check(reactor)
 end
 
 function damage_failsafe_check(reactor)
-    local damage_percentage = reactor.getDamagePercent() * 100
+    local damage_percentage = reactor.getDamagePercent()
     if damage_percentage > DAMAGE_PERCENTAGE_THRESHOLD then
         print(string.format("Damage is %.0f%%! (threshold: %.0f%%)", damage_percentage, DAMAGE_PERCENTAGE_THRESHOLD))
         return false
