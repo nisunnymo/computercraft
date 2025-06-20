@@ -11,6 +11,8 @@ if not spawner or not crusher or not slaugher_factory_switch or not crusher_swit
     for _, name in ipairs(peripheral.getNames()) do
         print(name)
     end
+else
+    print("All peripherals are connected successfully.")
 end
 
 while true do
