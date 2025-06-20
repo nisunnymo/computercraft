@@ -16,36 +16,38 @@ for _, name in ipairs(peripheral.getNames()) do
     print(name)
 end
 
+sleep(1)
+
 while true do
     if redstone.getAnalogInput("front") > 0 then
         print("enabling spawner from ae2 input")
         -- enabling spawner from ae2 redstone input
-        spawner.setEnabled("top", true)
+        spawner.setOutput("top", true)
         redstone.setAnalogOutput("left", 15)
-        crusher.setEnabled("right", false)
+        crusher.setOutput("right", false)
     elseif slaugher_factory_switch.getInput("front") then
         -- enabling slaughter factory from manual input
         print("enabling crusher from manual input")
-        spawner.setEnabled("top", true)
+        spawner.setOutput("top", true)
         redstone.setAnalogOutput("left", 15)
-        crusher.setEnabled("right", false)
+        crusher.setOutput("right", false)
     elseif crusher_switch.getInput("front") then
         -- enabling crusher from manual input
         print("enabling crusher from manual input")
-        spawner.setEnabled("top", true)
-        crusher.setEnabled("right", true)
+        spawner.setOutput("top", true)
+        crusher.setOutput("right", true)
         redstone.setAnalogOutput("left", 0)
     elseif spawner_switch.getInput("front") then
         -- enabling spawner only from manual input
         print("enabling spawner only from manual input")
-        spawner.setEnabled("top", true)
+        spawner.setOutput("top", true)
         redstone.setAnalogOutput("left", 0)
-        crusher.setEnabled("right", false)
+        crusher.setOutput("right", false)
     else
         -- disabling everything
-        spawner.setEnabled("top", false)
+        spawner.setOutput("top", false)
         redstone.setAnalogOutput("left", 0)
-        crusher.setEnabled("right", false)
+        crusher.setOutput("right", false)
     end
     sleep(0.5) -- wait for 0.5 second before checking again
 end
