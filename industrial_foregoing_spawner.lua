@@ -7,16 +7,13 @@ local spawner_switch = peripheral.wrap("redstone_relay_5")
 
 if not spawner or not crusher or not slaugher_factory_switch or not crusher_switch or not spawner_switch then
     error("One of the peripherals is not connected. Please check the wiring.")
+    print("Peripherals connected:")
+    for _, name in ipairs(peripheral.getNames()) do
+        print(name)
+    end
 else
     print("All peripherals are connected successfully.")
 end
-
-print("Peripherals connected:")
-for _, name in ipairs(peripheral.getNames()) do
-    print(name)
-end
-
-sleep(1)
 
 while true do
     if redstone.getAnalogInput("front") > 0 then
